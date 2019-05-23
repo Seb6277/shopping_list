@@ -36,6 +36,11 @@ class ItemList extends React.Component {
         })
     }
 
+    removeItem(itemName) {
+        // TODO: Write the delete function from database and render using state to update components
+        console.log(itemName)
+    }
+
     render() {
         return(
             <div className="app_wrapper">
@@ -45,7 +50,7 @@ class ItemList extends React.Component {
                 >ADD</Button>
                 <ListGroup className="list_group">
                     {this.state.listedItems.map((item) =>
-                    <Item item={item} key={item.id}/>
+                    <Item item={item} removeItem={this.removeItem.bind(this)} key={item.id}/>
                     )}
                 </ListGroup>
             </div>

@@ -27,11 +27,12 @@ class ItemList extends React.Component {
         const newItem = prompt("")
         fetch('http://localhost:1337/create', {
             method: 'POST',
-            body:{
-                "name": newItem
-            }
-        }).then(function (response) {
-            console.log(response)
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({name: newItem})
+        }).then((response) => {
+            return (response.json())
+        }).then((json) => {
+            this.setState({listedItems: [...this.state.listedItems, json]})
         })
     }
 

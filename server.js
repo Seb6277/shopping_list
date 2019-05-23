@@ -44,14 +44,8 @@ app.get('/', function (req, res) {
 app.post('/create', function (req, res) {
     if (req.body.name.length >= 2){
         const savedItem = new ItemModel({name: req.body.name, id: uuid(req.body.name)});
-        savedItem.save(function (error) {
-            if (error != null) {
-                console.log(error)
-            }
-        });
+        savedItem.save().then(item => res.json(item))
     }
-    res.status(201);
-    res.end()
 });
 
 app.delete('/delete', function (req, res) {

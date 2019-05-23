@@ -9,7 +9,7 @@ class Item extends React.Component {
                 <Button
                     className="delete_button"
                     color="danger"
-                    onClick={() => this.props.removeItem(this.props.item.name)}
+                    onClick={() => this.props.removeItem(this.props.item._id)}
                 >X</Button>
                 {this.props.item.name}
             </ListGroupItem>

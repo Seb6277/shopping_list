@@ -49,17 +49,9 @@ app.post('/create', function (req, res) {
 });
 
 app.delete('/delete', function (req, res) {
-    ItemModel.findOne({name: req.body.name}, function (err, item) {
-        if (err) {
-            console.log(err);
-            res.end()
-        } else {
-            ItemModel.deleteOne({name: req.body.name}, function (err) {
-                if (err) return err
-            });
-            res.end()
-        }
-    });
+    ItemModel.findById(req.body.id)
+        .then(item => item.remove().then(res.json({success : true})))
+        .catch(error => res.status(404).json({success: false}))
 });
 
 const port = 1337;

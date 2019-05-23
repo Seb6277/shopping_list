@@ -36,9 +36,32 @@ class ItemList extends React.Component {
         })
     }
 
-    removeItem(itemName) {
+    removeItem(itemId) {
         // TODO: Write the delete function from database and render using state to update components
-        console.log(itemName)
+        fetch('http://localhost:1337/delete', {
+            method: 'DELETE',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({id: itemId})
+        }).then((response) => {
+            return (response.json())
+        }).then((json) => {
+            if (json.success) {
+                this.updateListedItems()
+            }
+        })
+    }
+
+    updateListedItems () {
+        this.setState({listedItems: []})
+        fetch('http://localhost:1337/').then((res) => {
+            return res.json()
+        }).then((data) => {
+            data.map((itemData) => {
+                this.setState({listedItems: [...this.state.listedItems, itemData]})
+            })
+        }).catch((error) => {
+            console.log(error)
+        })
     }
 
     render() {

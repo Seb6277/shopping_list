@@ -37,7 +37,6 @@ class ItemList extends React.Component {
     }
 
     removeItem(itemId) {
-        // TODO: Write the delete function from database and render using state to update components
         fetch('http://localhost:1337/delete', {
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'},
@@ -46,21 +45,11 @@ class ItemList extends React.Component {
             return (response.json())
         }).then((json) => {
             if (json.success) {
-                this.updateListedItems()
+                const items = [...this.state.listedItems];
+                const index = items.findIndex((item) => item._id === itemId);
+                items.splice(index, 1);
+                this.setState({listedItems: items})
             }
-        })
-    }
-
-    updateListedItems () {
-        this.setState({listedItems: []})
-        fetch('http://localhost:1337/').then((res) => {
-            return res.json()
-        }).then((data) => {
-            data.map((itemData) => {
-                this.setState({listedItems: [...this.state.listedItems, itemData]})
-            })
-        }).catch((error) => {
-            console.log(error)
         })
     }
 

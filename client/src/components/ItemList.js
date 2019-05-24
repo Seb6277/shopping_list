@@ -45,11 +45,9 @@ class ItemList extends React.Component {
             return (response.json())
         }).then((json) => {
             if (json.success) {
-                const items = [...this.state.listedItems]
-                const index = items.findIndex(function (item) {
-                    return item._id === itemId
-                })
-                items.splice(index, 1)
+                const items = [...this.state.listedItems];
+                const index = items.findIndex((item) => item._id === itemId);
+                items.splice(index, 1);
                 this.setState({listedItems: items})
             }
         })

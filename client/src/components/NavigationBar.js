@@ -12,7 +12,7 @@ class NavigationBar extends React.Component {
                         <NavLink href="/">Shopping List</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="#">About</NavLink>
+                        <NavLink href="/about">About</NavLink>
                     </NavItem>
                 </Nav>
             </Navbar>

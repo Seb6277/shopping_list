@@ -1,23 +1,16 @@
 import React from 'react'
 import {ListGroup, Button} from 'reactstrap'
 import Item from './Item'
+import {connect} from "react-redux";
+import {addItemToStore, getItem, removeItem} from "../Actions/ItemAction";
 
 class ItemList extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            listedItems: []
-        }
-    }
 
     componentDidMount() {
         fetch('http://localhost:1337/').then((res) => {
             return res.json()
         }).then((data) => {
-            data.map((itemData) => {
-                this.setState({listedItems: [...this.state.listedItems, itemData]})
-            })
+            this.props.dispatch(getItem(data))
         }).catch((error) => {
             console.log(error)
         })
@@ -32,7 +25,7 @@ class ItemList extends React.Component {
         }).then((response) => {
             return (response.json())
         }).then((json) => {
-            this.setState({listedItems: [...this.state.listedItems, json]})
+            this.props.dispatch(addItemToStore(json))
         })
     }
 
@@ -45,10 +38,7 @@ class ItemList extends React.Component {
             return (response.json())
         }).then((json) => {
             if (json.success) {
-                const items = [...this.state.listedItems];
-                const index = items.findIndex((item) => item._id === itemId);
-                items.splice(index, 1);
-                this.setState({listedItems: items})
+                this.props.dispatch(removeItem(itemId))
             }
         })
     }
@@ -61,8 +51,8 @@ class ItemList extends React.Component {
                         onClick={() => this.addItem()}
                 >ADD</Button>
                 <ListGroup className="list_group">
-                    {this.state.listedItems.map((item) =>
-                    <Item item={item} removeItem={this.removeItem.bind(this)} key={item.id}/>
+                    {this.props.storedItems.map((item) =>
+                    <Item item={item} removeItem={this.removeItem.bind(this)} key={item._id}/>
                     )}
                 </ListGroup>
             </div>
@@ -70,4 +60,8 @@ class ItemList extends React.Component {
     }
 }
 
-export default ItemList
+const mapStateToProps = (state) => {
+    return state
+}
+
+export default connect(mapStateToProps)(ItemList)

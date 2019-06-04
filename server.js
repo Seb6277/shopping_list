@@ -42,9 +42,11 @@ app.get('/', function (req, res) {
 });
 
 app.post('/create', function (req, res) {
-    if (req.body.name.length >= 2){
-        const savedItem = new ItemModel({name: req.body.name, id: uuid(req.body.name)});
-        savedItem.save().then(item => res.json(item))
+    if (req.body.name !== null){
+        if (req.body.name.length >= 2) {
+            const savedItem = new ItemModel({name: req.body.name, id: uuid(req.body.name)});
+            savedItem.save().then(item => res.json(item))
+        }
     }
 });
 

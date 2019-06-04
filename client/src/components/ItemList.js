@@ -2,11 +2,7 @@ import React from 'react'
 import {ListGroup, Button} from 'reactstrap'
 import Item from './Item'
 import {connect} from "react-redux";
-<<<<<<< HEAD
 import {addItemToStore, getItem, removeStoredItem} from "../Actions/ItemAction";
-=======
-import {addItemToStore, getItem, removeItem} from "../Actions/ItemAction";
->>>>>>> 575a41da6ccc6cde8c1bba9f618b1c57ca75380e
 
 class ItemList extends React.Component {
 
@@ -30,11 +26,7 @@ class ItemList extends React.Component {
             return response.json()
         }).then((json) => {
             this.props.dispatch(addItemToStore(json))
-<<<<<<< HEAD
         }).catch()
-=======
-        })
->>>>>>> 575a41da6ccc6cde8c1bba9f618b1c57ca75380e
     }
 
     removeItem(itemId) {
@@ -46,11 +38,7 @@ class ItemList extends React.Component {
             return (response.json())
         }).then((json) => {
             if (json.success) {
-<<<<<<< HEAD
                 this.props.dispatch(removeStoredItem(itemId))
-=======
-                this.props.dispatch(removeItem(itemId))
->>>>>>> 575a41da6ccc6cde8c1bba9f618b1c57ca75380e
             }
         })
     }

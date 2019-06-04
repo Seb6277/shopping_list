@@ -1,5 +1,5 @@
 import React from 'react'
-import {Navbar, NavbarBrand, NavLink, NavItem, NavbarToggler} from 'reactstrap'
+import {Navbar, NavbarBrand, NavLink, NavItem} from 'reactstrap'
 import Nav from "reactstrap/es/Nav";
 
 class NavigationBar extends React.Component {

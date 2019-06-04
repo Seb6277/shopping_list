@@ -15,6 +15,6 @@ export function addItemToStore(item) {
     return {type: ADD_ITEM, value: item}
 }
 
-export function removeItem(itemID) {
+export function removeStoredItem(itemID) {
     return {type: REMOVE_ITEM, value: itemID}
 }
